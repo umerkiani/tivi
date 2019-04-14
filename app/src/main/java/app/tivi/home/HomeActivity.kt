@@ -30,6 +30,7 @@ import androidx.navigation.navOptions
 import app.tivi.R
 import app.tivi.TiviActivityMvRxView
 import app.tivi.databinding.ActivityHomeBinding
+import app.tivi.extensions.requestApplyInsetsWhenAttached
 import app.tivi.extensions.updateConstraintSets
 import app.tivi.home.main.HomeNavigationEpoxyController
 import app.tivi.home.main.HomeNavigationItem
@@ -89,13 +90,13 @@ class HomeActivity : TiviActivityMvRxView() {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
         binding.root.setOnApplyWindowInsetsListener { _, insets ->
             binding.homeRoot.updateConstraintSets {
-                it.constrainHeight(R.id.status_scrim, insets.systemWindowInsetTop)
+                constrainHeight(R.id.status_scrim, insets.systemWindowInsetTop)
             }
             // Just return insets
             insets
         }
         // Finally, request some insets
-        binding.root.requestApplyInsets()
+        binding.root.requestApplyInsetsWhenAttached()
 
         binding.homeToolbar.setOnMenuItemClickListener(::onMenuItemClicked)
 
